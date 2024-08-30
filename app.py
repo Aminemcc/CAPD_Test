@@ -30,11 +30,11 @@ class CAPD_BOT:
     
     def server(self):
         @self.app.route("/")        
-        def home(self):
+        def home():
             return "Sahabat CAPD BOT API"
         
         @self.app.route("/getResponse")
-        def getResponse(self):
+        def getResponse():
             question = request.args.get('q')
             return self.ask(question)
         
