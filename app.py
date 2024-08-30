@@ -68,7 +68,7 @@ class CAPD_BOT:
     def ask(self, question):
         q = self.clean(question)
         if not bool(q):
-            return "Silahkan bertanya lagi", -1, 0
+            return "Silahkan bertanya", -1, 0
         sequences = self.tokenizer.texts_to_sequences([q])
         padded_sequences = pad_sequences(sequences, maxlen=100, truncating='post', padding='post')
         prediction = self.model.predict(padded_sequences)
@@ -90,25 +90,10 @@ class CAPD_BOT:
             print(score)
             print("-"*50)
     
+if __name__ == "__main__":
+    model_name = "DL BiLSTM 10K.keras"
+    tokenizer_name = "tokenizer BiLSM 11183.pkl"
+    data_name = "FAQ_CAPD.xlsx"
+    bot = CAPD_BOT(model_name, tokenizer_name, data_name)
 
-model_name = "DL BiLSTM 10K.keras"
-tokenizer_name = "tokenizer BiLSM 11183.pkl"
-data_name = "FAQ_CAPD.xlsx"
-bot = CAPD_BOT(model_name, tokenizer_name, data_name)
-bot.run()
-# bot.run()
-# @app.route("/")
-# def home():
-#     return render_template("index.html")
-
-# @app.route('/test')
-# def getResponse2():
-#     question = request.args.get('q')
-#     if question:
-#         res, _, _ = ask(question)
-#         return res
-#     else:
-#         return "Silahkan bertanya."
-
-# if __name__ == "__main__":
-    
+    bot.run()
