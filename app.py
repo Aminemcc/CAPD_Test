@@ -17,7 +17,7 @@ class CAPD_BOT:
     # DEEP LEARNING MODEL WITHOUT GPU NEEDED
     def __init__(self, model_name, tokenizer_name, data_name):
         self.template_folder = ""
-        self.app = Flask(__name__, template_folder=template_folder)
+        self.app = Flask(__name__, template_folder=self.template_folder)
         self.app.static_folder = 'static'
 
         self.model = self.load_model(model_name)
