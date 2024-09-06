@@ -22,7 +22,8 @@ class CAPD_BOT:
 
         self.model = self.load_model(model_name)
         self.tokenizer = self.load_tokenizer(tokenizer_name)
-        self.data = self.load_data(data_name)
+        # self.data = self.load_data(data_name)
+        self.data = pd.read_excel(data_name)
 
         self.factory = StemmerFactory()
         self.stemmer = self.factory.create_stemmer()
@@ -36,7 +37,9 @@ class CAPD_BOT:
         @self.app.route("/getResponse")
         def getResponse():
             question = request.args.get('q')
-            return self.ask(question)
+            # print(question)
+            ans, label, score = self.ask(question)
+            return ans
         
 
     def clean(self, sentence):
@@ -91,9 +94,9 @@ class CAPD_BOT:
             print("-"*50)
     
 if __name__ == "__main__":
-    model_name = "DL BiLSTM 10K.keras"
-    tokenizer_name = "tokenizer BiLSM 11183.pkl"
-    data_name = "FAQ_CAPD.xlsx"
+    model_name = "DL-deploy.keras"
+    tokenizer_name = "tokenizer-deploy.pkl"
+    data_name = "FAQ_DEPLOY.xlsx"
     bot = CAPD_BOT(model_name, tokenizer_name, data_name)
 
     bot.run()
