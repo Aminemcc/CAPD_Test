@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import pandas as pd
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 # template_folder = ""
 # app = Flask(__name__, template_folder=template_folder)
@@ -40,6 +40,15 @@ class CAPD_BOT:
             # print(question)
             ans, label, score = self.ask(question)
             return ans
+        
+        @self.app.route("/chatbot", methods=["POST"])
+        def chatbot():
+            data = request.get_json()
+            question = data.get('message')
+            sender = data.get('sender')
+            # print(question)
+            ans, label, score = self.ask(question)
+            return jsonify({"recipient_id": sender, "text": ans})
         
 
     def clean(self, sentence):
