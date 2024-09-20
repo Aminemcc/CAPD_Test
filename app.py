@@ -34,7 +34,7 @@ class CAPD_BOT:
         def home():
             return "Sahabat CAPD BOT API"
         
-        @self.app.route("/getResponse")
+        @self.app.route("/ask")
         def getResponse():
             question = request.args.get('q')
             # print(question)
@@ -50,6 +50,14 @@ class CAPD_BOT:
             ans, label, score = self.ask(question)
             return jsonify({"recipient_id": sender, "text": ans})
         
+        @self.app.route("/webhooks/rest/webhook", methods=["POST"])
+        def chatbott():
+            data = request.get_json()
+            question = data.get('message')
+            sender = data.get('sender')
+            # print(question)
+            ans, label, score = self.ask(question)
+            return jsonify({"recipient_id": sender, "text": ans})
 
     def clean(self, sentence):
         stemmed_sentence = self.stemmer.stem(sentence)
