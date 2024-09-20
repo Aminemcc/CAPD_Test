@@ -50,7 +50,7 @@ class CAPD_BOT:
             ans, label, score = self.ask(question)
             return jsonify({"recipient_id": sender, "text": ans})
         
-        @self.app.route("/webhooks/rest/webhook", methods=["POST"])
+        @self.app.route("/webhooks/rest/webhook/", methods=["POST"])
         def chatbott():
             data = request.get_json()
             question = data.get('message')
