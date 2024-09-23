@@ -7,7 +7,7 @@ endpoint = "real"
 
 domain = "10.199.13.61"
 port = 5005
-endpoint = "webhooks/rest/webhook"
+endpoint = "webhooks/rest/webhook/"
 
 url = f'http://{domain}:{port}/{endpoint}'
 payload = {
