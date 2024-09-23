@@ -57,7 +57,7 @@ class CAPD_BOT:
             sender = data.get('sender')
             # print(question)
             ans, label, score = self.ask(question)
-            return jsonify([{"recipient_id": sender,}, {"text": ans}])
+            return jsonify([{"recipient_id": sender, "text": ans}])
 
     def clean(self, sentence):
         stemmed_sentence = self.stemmer.stem(sentence)
